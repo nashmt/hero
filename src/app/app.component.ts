@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Partner Portal';
+  title = 'Partner Portal by Software AG Government Solutions';
 }
