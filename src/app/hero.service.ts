@@ -25,7 +25,7 @@ export class HeroService {
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
         tap(_ => this.log('fetched users')),
-        catchError(this.handleError<Hero[]>('getUsers', []))
+        catchError(this.handleError<Hero[]>('getHeroes', []))
       );
   }
 
@@ -39,16 +39,16 @@ export class HeroService {
           const outcome = h ? `fetched` : `did not find`;
           this.log(`${outcome} hero id=${id}`);
         }),
-        catchError(this.handleError<Hero>(`getUser id=${id}`))
+        catchError(this.handleError<Hero>(`getHero id=${id}`))
       );
   }
 
   /** GET hero by id. Will 404 if id not found */
-  getUser(id: number): Observable<Hero> {
+  getHero(id: number): Observable<Hero> {
     const url = `${this.heroesUrl}/${id}`;
     return this.http.get<Hero>(url).pipe(
       tap(_ => this.log(`fetched hero id=${id}`)),
-      catchError(this.handleError<Hero>(`getUser id=${id}`))
+      catchError(this.handleError<Hero>(`getHero id=${id}`))
     );
   }
 
@@ -59,7 +59,7 @@ export class HeroService {
       return of([]);
     }
     return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
-      tap(_ => this.log(`found heroes matching "${term}"`)),
+      tap(_ => this.log(`found users matching "${term}"`)),
       catchError(this.handleError<Hero[]>('searchHeroes', []))
     );
   }
@@ -80,7 +80,7 @@ export class HeroService {
     const url = `${this.heroesUrl}/${id}`;
 
     return this.http.delete<Hero>(url, httpOptions).pipe(
-      tap(_ => this.log(`deleted hero id=${id}`)),
+      tap(_ => this.log(`deleted user id=${id}`)),
       catchError(this.handleError<Hero>('deleteHero'))
     );
   }
